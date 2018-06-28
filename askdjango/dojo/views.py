@@ -6,7 +6,10 @@ from django.http import HttpResponse
 def mysum(request, numbers):
     #request:httprquest
     #numbers = "1/2/12/123/12312/
-    result = sum(map(int, numbers.split("/")))
+    #numbers = "123/123/////122
+    #result = sum(map(int, numbers.split("/")))
+    result = sum(map(lambda s: int(s or 0), numbers.split("/")))
+    #빈문자열 처리
     # 위코드는
     # split1 = numbers.split("/")
     # for i in range(len(split1)):
