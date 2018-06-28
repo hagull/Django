@@ -17,3 +17,7 @@ def mysum(request, numbers):
     #와 같다
     #sum은 변수지정이 안되네 함수명으로 있어서 그런듯
     return HttpResponse(result)
+def hello(request, name, age):
+    #return HttpResponse("안녕하세요 " + name + "씨 " + "나이는 " + age + "살이시네요.")
+    #또 다르게는 아래와 같이 표현가능
+    return HttpResponse('안녕하세요. {}씨 나이는 {}살이시네요.'.format(name, age))
