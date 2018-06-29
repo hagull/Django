@@ -1,7 +1,8 @@
 #dojo/view.py
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from django.http import HttpResponse, JsonResponse
+import os
+from django.conf import settings
 # Create your views here.
 def mysum(request, numbers):
     #request:httprquest
@@ -21,3 +22,29 @@ def hello(request, name, age):
     #return HttpResponse("안녕하세요 " + name + "씨 " + "나이는 " + age + "살이시네요.")
     #또 다르게는 아래와 같이 표현가능
     return HttpResponse('안녕하세요. {}씨 나이는 {}살이시네요.'.format(name, age))
+def post_list1(request):
+    name = '남태식'
+    return HttpResponse('''
+    <h1>AskDjango</h1>
+    <p>{name}</p>
+    <p>여러분의 장고 어쩌구</p>
+    '''.format(name=name))
+def post_list2(request):
+    name = '남태식'
+    return render(request, 'dojo/post_list.html', {'name' : name})
+def post_list3(request):
+    return JsonResponse({
+        'message' : '안녕 파이썬 &장고',
+        'items' : ['파이썬', '장고', 'Celery', 'Azure', 'AWS'],
+    }, json_dumps_params = {'ensure_ascii' : False})
+# message와 item을 json 형태로 반환해줌
+def excel_download(request):
+    #filepath = '/Users/NamTaeSik/Django/askdjango/dojo/other/path/excel.xls'
+    filepath = os.path.join(settings.BASE_DIR, 'excel.xls')
+    filename = os.path.basename(filepath)
+    #BASE_DIR는 최상위 디렉토리의 값이 있다.(프로젝트 최상위디렉토리 askdjango)
+    with open(filepath, 'rb') as f:
+        response = HttpResponse(f, content_type='application/vnd.ms-excel')
+        # 필요한 응답헤더 세팅
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+        return response
