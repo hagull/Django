@@ -26,3 +26,5 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices= STATUS_CHOICES)
 # Create your models here.
+    def __str__(self):
+        return self.title
