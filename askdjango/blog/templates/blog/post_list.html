@@ -18,6 +18,8 @@
 </form>
 <strong>'{{ q }}' 검색 결과</strong>
 {% for post in post_list %}
+<!-- 여기서 데이터베이스 SQL 언어 발생-->
+
 <li>
     {{post.id}}
     {{post.title}}
@@ -31,4 +33,3 @@
 </ul>
 </body>
 </html>
-

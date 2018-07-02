@@ -25,6 +25,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices= STATUS_CHOICES)
+
+    class Meta:
+        ordering = ['-id']
+        #-붙이면 내림차순
 # Create your models here.
     def __str__(self):
         return self.title
