@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "blog",
     "dojo",
-    "django_extensions",
+    "django_extensions",# 장고에서 대화형 방식으로 개발할때 즉 notebook실행을 위해
     "debug_toolbar",
 ]
 
