@@ -2,4 +2,4 @@
 django = 1.10.5
 django-debug0tolbar
 django-extensions
-ipython[notebook
+ipython[notebook]
