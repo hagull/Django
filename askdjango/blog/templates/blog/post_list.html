@@ -12,12 +12,17 @@
 <p>
 안녕하세요 여러분의 ~~
 </p>
+<form action="" method ="get">
+    <input type="text" name="q" value = "{{q}}"/>
+    <input type="submit" value ="검색" />
+</form>
+<strong>'{{ q }}' 검색 결과</strong>
 {% for post in post_list %}
 <li>
     {{post.id}}
     {{post.title}}
     <small>by {{post.author}}</small>
-    <small>at {{post.updated_at}}</small>
+    <small>at {{post.updated_at}}</small>1958080
 </li>
 {% endfor %}
 <ul>
