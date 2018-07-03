@@ -4,7 +4,7 @@ from . import views
 from  django.conf import settings
 urlpatterns = [
     url(r'^$', views.post_list),
-
+    url('^(?P<id>\d+)/$', views.post_detail),
 ]
 
 '''

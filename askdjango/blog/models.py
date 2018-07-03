@@ -32,3 +32,10 @@ class Post(models.Model):
 # Create your models here.
     def __str__(self):
         return self.title
+class Comment(models.Model):
+    post = models.ForeignKey(Post)
+    # 이를 통해 post의 id 와 관계시킬수있다. ex ) parent 라고 하면 parent_id라는 columns가 생성
+    author = models.CharField(max_length=20)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)
