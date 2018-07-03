@@ -25,7 +25,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices= STATUS_CHOICES)
-    tag_set = models.ManyToManyField('Tag')
+    tag_set = models.ManyToManyField('Tag', blank=True)
     #아래 Post와 다르게 문자열로 지정가능 아래는 되고 위는 안되는 이유는 Post가 가장 윗단에서 지정되었기 때문에
 
     class Meta:
