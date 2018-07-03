@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls')),
     url(r'^dojo/', include("dojo.urls")),
     url(r'^accounts/', include("accounts.urls")),
+    url(r'^shop/', include('shop.urls')),
 ]
 # 실 서비스 에서는 setting.py의 DEBUG 옵션은 False 로 둔다 TRUE는 개발옵션을 킨다는 뜻
 if settings.DEBUG:
