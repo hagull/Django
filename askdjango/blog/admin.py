@@ -1,6 +1,6 @@
 #blog/admin.py
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 #1.9부터 태그를 표현하는 방법
 from django.utils.safestring import mark_safe
 #기본적으로 태그를 escape 해준다 장고는 즉 위의 함수를 임포트 하여 허용해야한다
@@ -39,5 +39,8 @@ class PostAdmin(admin.ModelAdmin):
 #어드민에 모델을 등록하는 과정
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-
+    pass
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name']
     pass
