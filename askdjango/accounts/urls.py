@@ -3,5 +3,5 @@ from . import views
 from  django.conf import settings
 
 urlpatterns = [
-
+url(r'^profile/$', views.profile),
 ]

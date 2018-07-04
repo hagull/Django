@@ -13,9 +13,12 @@
 
 <li>
     {{post.id}}
-    <a href="/blog/{{post.id}}/">
+    <a href="{% url "post_detail" post.id %}"> {{ post.title }}</a>
+    <!--웹페이지 상에서 동작을 했다가 안했다가함 그이유는 ?
+    아무튼간에 위와같이 표현할수가 있다 이것이 중요 urls.py를 수정하여도 유연하게 장고에서 url 계산을 해준다 책에서는 이를 아름다운 url이라고 표현하더라-->
+    <!--<a href="/blog/{{post.id}}/">
         {{post.title}}
-    </a>
+    </a>-->
 
     <small>by {{post.author}}</small>
     <small>at {{post.updated_at}}</small>1958080
@@ -27,42 +30,3 @@
 </ul>
 {% endblock %}
 <!-- 여기서부터는 처리가 안됨 -->
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AskDjango's Blog</title>
-</head>
-<body>
-<h1>AskDjango</h1>
-<p>
-안녕하세요 여러분의 ~~
-</p>
-<form action="" method ="get">
-    <input type="text" name="q" value = "{{q}}"/>
-    <input type="submit" value ="검색" />
-</form>
-<strong>'{{ q }}' 검색 결과</strong>
-{% for post in post_list %}
-<!-- 여기서 데이터베이스 SQL 언어 발생-->
-<ul>
-<li>
-    {{post.id}}
-    <a href="/blog/{{post.id}}/">
-        {{post.title}}
-    </a>
-
-    <small>by {{post.author}}</small>
-    <small>at {{post.updated_at}}</small>1958080
-</li>
-</ul>
-{% endfor %}
-<ul>
-<li>http://localhost:8000/blog 주소로 접속해보세요</li>
-<li>template 경로를 다르게 쓰는이유</li>
-</ul>
-</body>
-</html>
