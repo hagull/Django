@@ -4,7 +4,7 @@ import re
 from django.forms import ValidationError
 from django.utils import timezone
 from django.conf import settings
-
+from django.core.urlresolvers import reverse
 def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
         raise ValidationError('Invalid LngLat Type')
@@ -36,6 +36,8 @@ class Post(models.Model):
 # Create your models here.
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', args = [self.id])
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     # 이를 통해 post의 id 와 관계시킬수있다. ex ) parent 라고 하면 parent_id라는 columns가 생성
