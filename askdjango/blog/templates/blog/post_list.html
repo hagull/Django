@@ -1,3 +1,32 @@
+{% extends "blog/layout.html" %}
+{% block content %}
+<p>
+안녕하세요 여러분의 ~~
+</p>
+<form action="" method ="get">
+    <input type="text" name="q" value = "{{q}}"/>
+    <input type="submit" value ="검색" />
+</form>
+<strong>'{{ q }}' 검색 결과</strong>
+{% for post in post_list %}
+<!-- 여기서 데이터베이스 SQL 언어 발생-->
+
+<li>
+    {{post.id}}
+    <a href="/blog/{{post.id}}/">
+        {{post.title}}
+    </a>
+
+    <small>by {{post.author}}</small>
+    <small>at {{post.updated_at}}</small>1958080
+</li>
+{% endfor %}
+<ul>
+<li>http://localhost:8000/blog 주소로 접속해보세요</li>
+<li>template 경로를 다르게 쓰는이유</li>
+</ul>
+{% endblock %}
+<!-- 여기서부터는 처리가 안됨 -->
 <!doctype html>
 <html>
 <head>
@@ -19,7 +48,7 @@
 <strong>'{{ q }}' 검색 결과</strong>
 {% for post in post_list %}
 <!-- 여기서 데이터베이스 SQL 언어 발생-->
-
+<ul>
 <li>
     {{post.id}}
     <a href="/blog/{{post.id}}/">
@@ -29,6 +58,7 @@
     <small>by {{post.author}}</small>
     <small>at {{post.updated_at}}</small>1958080
 </li>
+</ul>
 {% endfor %}
 <ul>
 <li>http://localhost:8000/blog 주소로 접속해보세요</li>

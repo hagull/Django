@@ -1,3 +1,20 @@
+{% extends "blog/layout.html" %}
+{% block title %} {{post.title}} {% endblock %}
+{% block content %}
+<h1>{{post.title}}</h1>
+<h2>{{post.author}}</h2>
+{{post.content | linebreaks}}
+<hr/>
+<h3>Comments</h3>
+{% for comment in post.comment_set.all %}
+<ul>
+<li>
+    {{comment.message}}
+    <br><small>작성자 : {{comment.author}} 시간 : {{comment.updated_at}}</small>
+</li>
+</ul>
+{% endfor %}
+{% endblock %}
 <!doctype HTML>
 <html>
 <head>
