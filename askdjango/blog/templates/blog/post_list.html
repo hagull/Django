@@ -1,33 +1,64 @@
 {% extends "blog/layout.html" %}
 {% block content %}
+<div class="container">
+<div class="jumbotron">
+<h1>Django Template <sup>by AskDjango</sup></h1>
+<p>여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
 <p>
-안녕하세요 여러분의 ~~
+<a class="btn btn-lg btn-primary" href="http://facebook.com/groups/askdjango">
+AskDjango 페이스북 그룹 &raquo;
+</a>
 </p>
-<form action="" method ="get">
+</div>
+</div>
+<div class ="row">
+    <div class = "col-sm-12">
+        <div class="alert alert-info">
+        <ul>
+<li>http://localhost:8000/blog 주소로 접속해보세요</li>
+<li>template 경로를 다르게 쓰는이유</li>
+</ul>
+            </div>
+        <p>
+        <form action="" method ="get">
     <input type="text" name="q" value = "{{q}}"/>
-    <input type="submit" value ="검색" />
+    <input type="submit" value ="검색" class ="btn btn-primary"/>
 </form>
+        </p>
 <strong>'{{ q }}' 검색 결과</strong>
-{% for post in post_list %}
+        <table class = "table table-hover table-bordered">
+
 <!-- 여기서 데이터베이스 SQL 언어 발생-->
-<li>
-    {{post.id}}
+            <thead>
+            <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>author</th>
+                    <th>updated at</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in post_list %}
+            <tr>
+    <td>{{post.id}}</td>
     <!--<a href="{ resolve_url(post) }">{{post.title}}</a>-->
     <!--일단 보류 템플렛에서 이 코드를 어떻게 구현할것인가에 대해  -->
-    <a href="{% url "blog:post_detail" post.id %}"> {{ post.title }}</a>
+    <td><a href="{% url "blog:post_detail" post.id %}"> {{ post.title }}</a></td>
     <!--웹페이지 상에서 동작을 했다가 안했다가함 그이유는 ?
     아무튼간에 위와같이 표현할수가 있다 이것이 중요 urls.py를 수정하여도 유연하게 장고에서 url 계산을 해준다 책에서는 이를 아름다운 url이라고 표현하더라-->
     <!--<a href="/blog/{{post.id}}/">
         {{post.title}}
     </a>-->
 
-    <small>by {{post.author}}</small>
-    <small>at {{post.updated_at}}</small>1958080
-</li>
+    <td><small>by {{post.author}}</small></td>
+    <td><small>at {{post.updated_at}}</small></td>
+</tr>
+            </tbody>
 {% endfor %}
-<ul>
-<li>http://localhost:8000/blog 주소로 접속해보세요</li>
-<li>template 경로를 다르게 쓰는이유</li>
-</ul>
+            </table>
+    </div>
+</div>
+
+
 {% endblock %}
 <!-- 여기서부터는 처리가 안됨 -->
