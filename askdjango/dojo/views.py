@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import os
 from django.conf import settings
+from .forms import PostForm
+from django.shortcuts import redirect
+from .models import Post
 # Create your views here.
 def mysum(request, numbers):
     #request:httprquest
@@ -48,3 +51,34 @@ def excel_download(request):
         # 필요한 응답헤더 세팅
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
         return response
+#form 메소드
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        # forms.py의 클래스 지정
+        if form.is_valid():
+            # 방법1
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+
+            #방법 2
+            # post = Post(title = form.cleaned_data['title'],
+            #             content = form.cleaned_data['content'])
+            # post.save()
+
+            # 방법 3
+            # post = Post.objects.create(title=form.cleaned_data['title'],
+            #                            content = form.cleaned_data['content'])
+
+            # 방법 4
+            post = Post.objects.create(**form.cleaned_data)
+            print(form.cleaned_data)
+            return redirect('/dojo/') # namespace:name 을 사용할수도있음
+        pass
+    else:
+        form = PostForm()
+    return render(request, 'dojo/post_form.html', {
+        'form' : form,
+    })
