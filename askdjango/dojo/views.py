@@ -73,7 +73,10 @@ def post_new(request):
             #                            content = form.cleaned_data['content'])
 
             # 방법 4
-            post = Post.objects.create(**form.cleaned_data)
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            # post = Post.objects.create(**form.cleaned_data)
+            post.save()
             print(form.cleaned_data)
             return redirect('/dojo/') # namespace:name 을 사용할수도있음
         pass
