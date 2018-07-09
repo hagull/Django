@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
 from django.http import Http404
+from .forms import PostForm
 # Create your views here.
 def post_list(request):
     qs = Post.objects.all()
@@ -23,4 +24,31 @@ def post_detail(request, id):
         #'post_author' : post.author,
         #'post_content' : post.content,
         'post' : post,#템플릿에 post가 넘겨진다
+    })
+def post_new(request):
+    if request.method =='POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            #post.user = request.user
+            #post.save()
+            return redirect(post) # post.get_absolute_url() => post detail view
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_form.html', {
+        'form': form
+    })
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method =='POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            #post.user = request.user
+            #post.save()
+            return redirect(post) # post.get_absolute_url() => post detail view
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {
+        'form': form
     })

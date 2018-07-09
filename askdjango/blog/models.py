@@ -38,6 +38,7 @@ class Post(models.Model):
         return self.title
     def get_absolute_url(self):
         return reverse('blog:post_detail', args = [self.id])
+    #새글을 작성하면 post detail로 넘어간다
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     # 이를 통해 post의 id 와 관계시킬수있다. ex ) parent 라고 하면 parent_id라는 columns가 생성
