@@ -4,8 +4,9 @@ from django.http import HttpResponse, JsonResponse
 import os
 from django.conf import settings
 from .forms import PostForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from .models import Post
+
 # Create your views here.
 def mysum(request, numbers):
     #request:httprquest
@@ -85,3 +86,39 @@ def post_new(request):
     return render(request, 'dojo/post_form.html', {
         'form' : form,
     })
+def post_edit(request,id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        # forms.py의 클래스 지정
+        if form.is_valid():
+            # 방법1
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+
+            #방법 2
+            # post = Post(title = form.cleaned_data['title'],
+            #             content = form.cleaned_data['content'])
+            # post.save()
+
+            # 방법 3
+            # post = Post.objects.create(title=form.cleaned_data['title'],
+            #                            content = form.cleaned_data['content'])
+
+            # 방법 4
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            # post = Post.objects.create(**form.cleaned_data)
+            post.save()
+            print(form.cleaned_data)
+            return redirect('/dojo/') # namespace:name 을 사용할수도있음
+
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'dojo/post_form.html', {
+        'form' : form,
+    })
+#수정기능 구현
