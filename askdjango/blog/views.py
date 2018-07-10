@@ -42,7 +42,7 @@ def post_edit(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method =='POST':
         form = PostForm(request.POST, request.FILES, instance=post)
-        if form.is_valid():
+        if form.is_valid(): # 유효성 검사가 수행됨
             post = form.save()
             #post.user = request.user
             #post.save()
