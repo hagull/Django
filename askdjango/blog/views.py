@@ -52,3 +52,6 @@ def post_edit(request, id):
     return render(request, 'blog/post_form.html', {
         'form': form
     })
+
+def post_test(request):
+    return render(request, 'blog/post_test.html')
