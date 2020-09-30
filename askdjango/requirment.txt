@@ -1,5 +1,6 @@
 설치한 목록
 django = 1.10.5
 django-debug0tolbar
+django-virtualenv
 django-extensions
 ipython[notebook]
